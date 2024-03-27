@@ -46,6 +46,9 @@ dependencies:
   animated_text_kit: ^4.2.2
   circular_countdown_timer: ^0.2.3
   fl_chart: ^0.64.0
+  pie_chart: ^5.4.0
+  dash_chat_2: ^0.0.19
+  chat_gpt_sdk: ^2.2.5
 
 dev_dependencies:
   flutter_test:

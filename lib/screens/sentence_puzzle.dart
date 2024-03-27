@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class SentencePuzzle extends StatefulWidget {
   @override
@@ -303,6 +305,23 @@ class _SentencePuzzleState extends State<SentencePuzzle> {
     // Dispose of the timer to avoid memory leaks
     timer?.cancel();
     super.dispose();
+  }
+
+  Future<void> sendDataToBackend() async {
+    var url = Uri.parse('http://10.0.2.2:8000/');
+    var response = await http.post(url,
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({
+          'totalAttempts': totalAttempts,
+          'timeTaken': currentTimeConsumed,
+          'attemptsPerPunctuation': attemptsPerPunctuation,
+        }));
+
+    if (response.statusCode == 200) {
+      print('Data sent successfully');
+    } else {
+      print('Failed to send data: ${response.statusCode}');
+    }
   }
 
   @override
